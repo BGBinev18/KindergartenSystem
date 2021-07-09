@@ -8,6 +8,5 @@ Kindergarten management application.
 Call me maybe!
 ```
 ## Authors
-Contributors names and contact info
     Boyan Binev - BGBinev18@codingburgas.bg
     Stoicho Chakarov - STChakarov18@codingburgas.bg
