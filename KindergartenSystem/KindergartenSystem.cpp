@@ -35,7 +35,7 @@ struct CHILD
     int age;
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////void insertUserName()
+////////////////////////////////////////void insertUserName()
 
 //Checks if the current user is admin or not
 bool accessLevel(string username, string password)
@@ -62,6 +62,9 @@ bool mainMenu(PARENT* user)
     switch (choice) 
     {
     case 1:
+
+        break;
+    case 2:
         
         break;
     case 0:
