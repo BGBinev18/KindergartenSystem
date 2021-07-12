@@ -2,7 +2,6 @@
 #include <cstdio>
 #include <string>
 
-
 using namespace std;
 
 
@@ -84,6 +83,8 @@ bool accessLevel(string username, string password)
 //Creates parent's profile
 void createParentProfile(PARENT user[], int& parentCounter)
 {
+    cout << "\n---------------------------------------" << endl;
+
     cout << "\nEnter parent's Id: " << endl;
     cin >> user[parentCounter].ID;
 
@@ -108,7 +109,49 @@ void createParentProfile(PARENT user[], int& parentCounter)
     cout << "\nEnter parent's child age: " << endl;
     cin >> user[parentCounter].childData.age;
 
+    cout << "\n---------------------------------------" << endl;
+
     parentCounter++;
+}
+
+
+void showParent(PARENT user)
+{
+    cout << "\n---------------------------------------" << endl;
+    cout << "\nParent Id: " << user.ID << endl;
+    cout << "Parent's username: " << user.parentUsername << endl;
+    cout << "Parent's password: " << user.parentPass << endl;
+    cout << "Parent's first name: " << user.firstName << endl;
+    cout << "Parent's last name: " << user.lastName << endl;
+    cout << "Parent's address: " << user.address << endl;
+    cout << "Parent's child name: " << user.childData.name << endl;
+    cout << "This parent's child is [" << user.childData.age << "] years old" << endl;
+    cout << "\n---------------------------------------" << endl;
+    cout << endl;
+}
+
+void showWholeParentsList(PARENT user[], int parentCounter)
+{
+    cout << "\nYou have entered the following employee:" << endl;
+    for (int i = 0; i < parentCounter; i++)
+    {
+        showParent(user[i]);
+    }
+}
+
+
+void showParentInfoById(PARENT* user, int& parentCounter)
+{
+    int id;
+    cout << "\n---------------------------------------" << endl;
+    cout << "Please enter the id of the parent you want to be shown: "; cin >> id;
+    for (int i = 0; i < parentCounter; i++)
+    {
+        if (id==user[i].ID)
+        {
+            showParent(user[i]);
+        }
+    }
 }
 
 bool mainMenu(PARENT* user, int& parentCounter)
@@ -120,6 +163,7 @@ bool mainMenu(PARENT* user, int& parentCounter)
         cout << "Please log in as administrator first!" << endl;
         logInAsAdmin();
         accessLevel(adminUsername, adminPass);
+        cout << endl;
     }
     else
     {
@@ -127,7 +171,6 @@ bool mainMenu(PARENT* user, int& parentCounter)
         cout << "2: Show full parents list." << endl;
         cout << "3. Show parent by Id." << endl;
         cout << "4. Show parent by Id." << endl;
-        //cout << "3: Switch profile." << endl;
         cout << "0: Exit!" << endl << endl;
         cout << "Please enter your choice: "; cin >> choice;
         switch (choice)
@@ -135,28 +178,28 @@ bool mainMenu(PARENT* user, int& parentCounter)
         case 1:
             createParentProfile(user, parentCounter);
             break;
-        /*case 3:
-            int caseOneChoice;
-            
-            cout << "\n1 : Log in as admin.\n2 : Log in as parent." << endl;
-            cout << "Your choice: "; cin >> caseOneChoice;
-            if (caseOneChoice == 1)
+        case 2:
+            if (parentCounter == 0)
             {
-               logInAsAdminSecondTime();
-               accessLevel(adminUsername, adminPass);
+                cout << "\n---------------------------------------" << endl;
+                cout << "\nThere aren't any parent's profiles yet!" << endl;
+                cout << "\n---------------------------------------" << endl;
             }
-            if (caseOneChoice == 2)
+            else
             {
-
+                showWholeParentsList(user, parentCounter);
             }
-            break;*/
+            break;
+        case 3:
+            showParentInfoById(user, parentCounter);
+            break;
         case 0:
             return false;
             break;
             
-            return true;
+            
         }
-    }
+    }return true;
 }
 
 int main()
