@@ -78,7 +78,8 @@ bool accessLevel(string username, string password)
     return isAdmin;
 }
 
-bool mainMenu(PARENT* user)
+
+bool mainMenu(PARENT* user,int& parentsCount)
 {
     int choice;
     cout << endl;
@@ -124,7 +125,8 @@ bool mainMenu(PARENT* user)
 
 int main()
 {
-    PARENT user[10];
+    PARENT user[100];
+    int parentCount = 0;
     bool doShowMenu = true;
     do {
         mainMenu(user);
