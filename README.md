@@ -3,7 +3,8 @@
 Kindergarden
 ## Description
 Kindergarten management application.
-## Getting Started
+## About the project
+
 ## Help
 Call me maybe!
 ```
