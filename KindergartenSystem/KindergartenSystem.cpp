@@ -78,6 +78,44 @@ bool accessLevel(string username, string password)
     return isAdmin;
 }
 
+void createParentAcc(PARENT user[], int& parentCount)
+{
+    cout << "\nEnter parent's Id: " << endl;
+    cin >> user[parentCount].ID;
+
+
+
+    cout << "\nEnter parent's username: " << endl;
+    cin >> user[parentCount].parentUsername;
+
+
+
+    cout << "\nEnter parent's password: " << endl;
+    cin >> user[parentCount].parentPass;
+
+
+
+    cout << "\nEnter parent's first name: " << endl;
+    cin >> user[parentCount].firstName;
+
+
+
+    cout << "\nEnter parent's last name: " << endl;
+    cin >> user[parentCount].lastName;
+
+
+
+    cout << "\nEnter parent's address: " << endl;
+    cin >> user[parentCount].address;
+
+
+
+    parentCount++;
+
+
+
+}
+
 bool mainMenu(PARENT* user)
 {
     int choice;
