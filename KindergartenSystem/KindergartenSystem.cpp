@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 //The only admin's username
 string adminUsername = "empty";
 
@@ -36,11 +35,17 @@ struct PARENT
     CHILD childData;
 };
 
+//Generates max ID
+int generateId(int& maxId)
+{
+    return maxId++;
+}
+
 //creates administrator 
 void logInAsAdmin()
 {
-    cout << "Please, enter your username: "; 
-    cin>>adminUsername;
+    cout << "Please, enter your username: ";
+    cin >> adminUsername;
     cout << "Please, enter your password: ";
     cin >> adminPass;
     adminCounter++;
@@ -51,7 +56,7 @@ void logInAsAdminSecondTime()
 {
     string adminUsernameCheck;
     string adminPassCheck;
-    
+
     do
     {
         cout << "Please, enter your username: "; cin >> adminUsernameCheck;
@@ -60,15 +65,13 @@ void logInAsAdminSecondTime()
         {
             cout << "\nWrong input!" << endl;
         }
-
     } while (adminUsernameCheck != adminUsername || adminPassCheck != adminPass);
-    
 }
 
 //Checks if the current user is admin or not
 bool accessLevel(string username, string password)
 {
-    if (username == adminUsername && password==adminPass)
+    if (username == adminUsername && password == adminPass)
     {
         isAdmin = true;
     }
@@ -81,13 +84,9 @@ bool accessLevel(string username, string password)
 }
 
 //Creates parent's profile
-void createParentProfile(PARENT user[], int& parentCounter)
+void createParentProfile(PARENT user[], int& parentCounter, int& maxId)
 {
     cout << "\n---------------------------------------" << endl;
-
-    cout << "\nEnter parent's Id: " << endl;
-    cin >> user[parentCounter].ID;
-
     cout << "\nEnter parent's username: " << endl;
     cin >> user[parentCounter].parentUsername;
 
@@ -111,6 +110,8 @@ void createParentProfile(PARENT user[], int& parentCounter)
 
     cout << "\n---------------------------------------" << endl;
 
+    user[parentCounter].ID = generateId(maxId);
+
     parentCounter++;
 }
 
@@ -130,6 +131,7 @@ void showParent(PARENT user)
     cout << endl;
 }
 
+
 void showWholeParentsList(PARENT user[], int parentCounter)
 {
     cout << "\nYou have entered the following employee:" << endl;
@@ -147,14 +149,51 @@ void showParentInfoById(PARENT* user, int& parentCounter)
     cout << "Please enter the id of the parent you want to be shown: "; cin >> id;
     for (int i = 0; i < parentCounter; i++)
     {
-        if (id==user[i].ID)
+        if (id == user[i].ID)
         {
             showParent(user[i]);
         }
     }
 }
 
-bool mainMenu(PARENT* user, int& parentCounter)
+
+int getParentById(PARENT* user, int& parentCounter, int id)
+{
+
+    for (int i = 0; i < parentCounter; i++)
+    {
+        if (user[i].ID == id)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+void deleteParent(PARENT* user, int& parentCounter, int id)
+{
+    int index = getParentById(user, parentCounter, id);
+
+    for (int i = index; i < parentCounter - 1; i++)
+    {
+        user[i] = user[i + 1];
+
+    }
+    parentCounter--;
+}
+
+//function for the menu of deleting one of the parents at the time
+void deleteParentMenu(PARENT* user, int& parentCounter, int& maxId)
+{
+    int id;
+    cout << "Enter employeeID(it's start from zero to one,two....):";
+    cin >> id;
+    deleteParent(user, parentCounter, id);
+}
+
+
+bool mainMenu(PARENT* user, int& parentCounter, int& maxId)
 {
     int choice;
     if (adminCounter == 0 && parentCounter == 0)
@@ -170,13 +209,13 @@ bool mainMenu(PARENT* user, int& parentCounter)
         cout << "\n1: Create parent profile." << endl;
         cout << "2: Show full parents list." << endl;
         cout << "3. Show parent by Id." << endl;
-        cout << "4. Show parent by Id." << endl;
+        cout << "4. Delete parent by Id." << endl;
         cout << "0: Exit!" << endl << endl;
         cout << "Please enter your choice: "; cin >> choice;
         switch (choice)
         {
         case 1:
-            createParentProfile(user, parentCounter);
+            createParentProfile(user, parentCounter, maxId);
             break;
         case 2:
             if (parentCounter == 0)
@@ -193,25 +232,40 @@ bool mainMenu(PARENT* user, int& parentCounter)
         case 3:
             showParentInfoById(user, parentCounter);
             break;
+        case 4:
+            if (parentCounter == 0)
+            {
+                cout << "Sorry there are not added parents! \nPlease choose option number 1 to add an employee!" << endl << endl;
+            }
+            else
+            {
+                deleteParentMenu(user, parentCounter, maxId);
+            }
+            break;
         case 0:
             return false;
             break;
-            
-            
         }
-    }return true;
+    }
+
+    return true;
 }
 
 int main()
 {
     PARENT user[100];
+    int maxId = 0;
     int parentCounter = 0;
     bool doShowMenu = true;
     do {
-        mainMenu(user, parentCounter);
-        if (mainMenu(user,parentCounter) == false)
+        mainMenu(user, parentCounter, maxId);
+        if (mainMenu(user, parentCounter, maxId) == false)
         {
             return 0;
         }
     } while (doShowMenu);
 }
+
+
+
+
