@@ -1,3 +1,6 @@
+<img src="https://user-images.githubusercontent.com/59725950/125429959-3233c67a-4231-4222-ab94-99b1436d8810.png" width="350">
+
+
 # KindergartenSystem
 # Project Title
 Kindergarden
