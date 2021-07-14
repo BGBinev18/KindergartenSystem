@@ -187,7 +187,7 @@ void deleteParent(PARENT* user, int& parentCounter, int id)
 void deleteParentMenu(PARENT* user, int& parentCounter, int& maxId)
 {
     int id;
-    cout << "Enter employeeID(it's start from zero to one,two....):";
+    cout << "Enter parent ID(it's start from zero,then one,two....):";
     cin >> id;
     deleteParent(user, parentCounter, id);
 }
@@ -237,6 +237,36 @@ void findChildByName(PARENT* user, int& parentCounter)
     }
 }
 
+void updateParentInfo(PARENT* user, int& parentCounter, int id)
+{
+    
+
+}
+
+void updateParentInfoById(PARENT* user, int& parentCounter)
+{
+    int id;
+    cout << "\n-----------------------------------------------------------" << endl;
+    cout << "\nPlease enter the id of the parent you want to be shown: "; cin >> id;
+    for (int i = 0; i < parentCounter; i++)
+    {
+        if (id == user[i].ID)
+        {
+            cout << "\nNew parent username: ";
+            cin >> user[i].parentUsername;
+
+            cout << "\nNew parent password: ";
+            cin >> user[i].parentPass;
+
+            cout << "\nNew parent first name: ";
+            cin >> user[i].firstName;
+
+            cout << "\nNew parent last name: ";
+            cin >> user[i].lastName;
+        }
+    }
+}
+
 bool mainMenu(PARENT* user, int& parentCounter, int& maxId)
 {
     int choice;
@@ -256,6 +286,7 @@ bool mainMenu(PARENT* user, int& parentCounter, int& maxId)
         cout << "4. Delete parent by Id." << endl;
         cout << "5. Find parent by last name." << endl;
         cout << "6. Find child's parent by child's name." << endl;
+        cout << "7. Update parent's information by Id." << endl;
         cout << "0: Exit!" << endl << endl;
         cout << "Please enter your choice: "; cin >> choice;
         switch (choice)
@@ -293,6 +324,9 @@ bool mainMenu(PARENT* user, int& parentCounter, int& maxId)
             break;
         case 6:
             findChildByName(user, parentCounter);
+            break;
+        case 7:
+            updateParentInfoById(user, parentCounter);
             break;
         case 0:
             return false;
