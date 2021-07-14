@@ -86,7 +86,7 @@ bool accessLevel(string username, string password)
 //Creates parent's profile
 void createParentProfile(PARENT user[], int& parentCounter, int& maxId)
 {
-    cout << "\n---------------------------------------" << endl;
+    cout << "\n-----------------------------------------------------------" << endl;
     cout << "\nEnter parent's username: " << endl;
     cin >> user[parentCounter].parentUsername;
 
@@ -108,7 +108,7 @@ void createParentProfile(PARENT user[], int& parentCounter, int& maxId)
     cout << "\nEnter parent's child age: " << endl;
     cin >> user[parentCounter].childData.age;
 
-    cout << "\n---------------------------------------" << endl;
+    cout << "\n-----------------------------------------------------------" << endl;
 
     user[parentCounter].ID = generateId(maxId);
 
@@ -118,7 +118,7 @@ void createParentProfile(PARENT user[], int& parentCounter, int& maxId)
 
 void showParent(PARENT user)
 {
-    cout << "\n---------------------------------------" << endl;
+    cout << "\n-----------------------------------------------------------" << endl;
     cout << "\nParent Id: " << user.ID << endl;
     cout << "Parent's username: " << user.parentUsername << endl;
     cout << "Parent's password: " << user.parentPass << endl;
@@ -127,7 +127,7 @@ void showParent(PARENT user)
     cout << "Parent's address: " << user.address << endl;
     cout << "Parent's child name: " << user.childData.name << endl;
     cout << "This parent's child is [" << user.childData.age << "] years old" << endl;
-    cout << "\n---------------------------------------" << endl;
+    cout << "\n-----------------------------------------------------------" << endl;
     cout << endl;
 }
 
@@ -145,8 +145,8 @@ void showWholeParentsList(PARENT user[], int parentCounter)
 void showParentInfoById(PARENT* user, int& parentCounter)
 {
     int id;
-    cout << "\n---------------------------------------" << endl;
-    cout << "Please enter the id of the parent you want to be shown: "; cin >> id;
+    cout << "\n-----------------------------------------------------------" << endl;
+    cout << "\nPlease enter the id of the parent you want to be shown: "; cin >> id;
     for (int i = 0; i < parentCounter; i++)
     {
         if (id == user[i].ID)
@@ -193,6 +193,50 @@ void deleteParentMenu(PARENT* user, int& parentCounter, int& maxId)
 }
 
 
+void findParentByLastName(PARENT* user, int& parentCounter)
+{
+    string parentLastName;
+    int counter = 0;
+    cout << "\nPlease write the last name of the parent who you want to be shown: "; cin >> parentLastName;
+    for (int i = 0; i < parentCounter; i++)
+    {
+        if (parentLastName==user[i].lastName)
+        {
+            showParent(user[i]);
+            counter++;
+        }
+    }
+    if (counter == 0)
+    {
+        cout << "\n-----------------------------------------------------------" << endl;
+        cout << "\nThere aren't any parents with that last name yet!" << endl;
+        cout << "\n-----------------------------------------------------------" << endl;
+
+    }
+}
+
+void findChildByName(PARENT* user, int& parentCounter)
+{
+    string childName;
+    int counter = 0;
+    cout << "\nPlease write the child's name of the parent who you want to be shown: "; cin >> childName;
+    for (int i = 0; i < parentCounter; i++)
+    {
+        if (childName == user[i].childData.name)
+        {
+            showParent(user[i]);
+            counter++;
+        }
+    }
+    if (counter==0)
+    {
+        cout << "\n-----------------------------------------------------------" << endl;
+        cout << "\nThere aren't any children with that name yet!" << endl;
+        cout << "\n-----------------------------------------------------------" << endl;
+
+    }
+}
+
 bool mainMenu(PARENT* user, int& parentCounter, int& maxId)
 {
     int choice;
@@ -210,6 +254,8 @@ bool mainMenu(PARENT* user, int& parentCounter, int& maxId)
         cout << "2: Show full parents list." << endl;
         cout << "3. Show parent by Id." << endl;
         cout << "4. Delete parent by Id." << endl;
+        cout << "5. Find parent by last name." << endl;
+        cout << "6. Find child's parent by child's name." << endl;
         cout << "0: Exit!" << endl << endl;
         cout << "Please enter your choice: "; cin >> choice;
         switch (choice)
@@ -220,9 +266,9 @@ bool mainMenu(PARENT* user, int& parentCounter, int& maxId)
         case 2:
             if (parentCounter == 0)
             {
-                cout << "\n---------------------------------------" << endl;
+                cout << "\n-----------------------------------------------------------" << endl;
                 cout << "\nThere aren't any parent's profiles yet!" << endl;
-                cout << "\n---------------------------------------" << endl;
+                cout << "\n-----------------------------------------------------------" << endl;
             }
             else
             {
@@ -241,6 +287,12 @@ bool mainMenu(PARENT* user, int& parentCounter, int& maxId)
             {
                 deleteParentMenu(user, parentCounter, maxId);
             }
+            break;
+        case 5:
+            findParentByLastName(user, parentCounter);
+            break;
+        case 6:
+            findChildByName(user, parentCounter);
             break;
         case 0:
             return false;
