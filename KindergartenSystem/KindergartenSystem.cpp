@@ -107,10 +107,17 @@ void createParentProfile(PARENT user[], int& parentCounter, int& maxId)
     cout << "\nEnter parent's child name: " << endl;
     cin >> user[parentCounter].childData.name;
 
-    cout << "\nEnter parent's child age: " << endl;
+    cout << "\nEnter parent's child age between 1 and 5 included: " << endl;
+    
     cin >> user[parentCounter].childData.age;
+    
+    while (user[parentCounter].childData.age <1 || user[parentCounter].childData.age > 5)
+    {
+        cout << "This child's age is not between 1 and 5, please write correct age: "; cin >> user[parentCounter].childData.age;
+    }
+    
 
-    cout << "\nEnter how far the child lives with the numbers from 1 to 3(1 is the furthest address and 3 is the closest): " << endl;
+    cout << "\nEnter how far the child lives with the numbers from 1 to 3(1 is the closest address and 3 is the furthest): " << endl;
     cin >> user[parentCounter].childData.distance;
 
     cout << "\n-----------------------------------------------------------" << endl;
