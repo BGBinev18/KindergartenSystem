@@ -21,6 +21,8 @@ struct CHILD
 {
     string name;
     int age;
+    int distance;
+    int pointSum;
 };
 
 //Parent's data
@@ -108,6 +110,9 @@ void createParentProfile(PARENT user[], int& parentCounter, int& maxId)
     cout << "\nEnter parent's child age: " << endl;
     cin >> user[parentCounter].childData.age;
 
+    cout << "\nEnter how far the child lives with the numbers from 1 to 3(1 is the furthest address and 3 is the closest): " << endl;
+    cin >> user[parentCounter].childData.distance;
+
     cout << "\n-----------------------------------------------------------" << endl;
 
     user[parentCounter].ID = generateId(maxId);
@@ -127,6 +132,7 @@ void showParent(PARENT user)
     cout << "Parent's address: " << user.address << endl;
     cout << "Parent's child name: " << user.childData.name << endl;
     cout << "This parent's child is [" << user.childData.age << "] years old" << endl;
+    cout << "The amount of points for this candidate: " << user.childData.pointSum << endl;
     cout << "\n-----------------------------------------------------------" << endl;
     cout << endl;
 }
@@ -267,6 +273,15 @@ void updateParentInfoById(PARENT* user, int& parentCounter)
     }
 }
 
+void sumCandidatePoints(PARENT* user, int& parentCounter)
+{
+    
+    for (int i = 0; i < parentCounter; i++)
+    {
+        user[i].childData.pointSum = user[i].childData.age + user[i].childData.distance;
+    }
+}
+
 bool mainMenu(PARENT* user, int& parentCounter, int& maxId)
 {
     int choice;
@@ -293,6 +308,7 @@ bool mainMenu(PARENT* user, int& parentCounter, int& maxId)
         {
         case 1:
             createParentProfile(user, parentCounter, maxId);
+            sumCandidatePoints(user, parentCounter);
             break;
         case 2:
             if (parentCounter == 0)
