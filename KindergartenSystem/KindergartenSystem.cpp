@@ -127,7 +127,7 @@ void createParentProfile(PARENT user[], int& parentCounter, int& maxId)
     parentCounter++;
 }
 
-
+//It shows the whole info for a parent;
 void showParent(PARENT user)
 {
     cout << "\n-----------------------------------------------------------" << endl;
@@ -144,17 +144,17 @@ void showParent(PARENT user)
     cout << endl;
 }
 
-
+//The menu to show all parents;
 void showWholeParentsList(PARENT user[], int parentCounter)
 {
-    cout << "\nYou have entered the following employee:" << endl;
+    cout << "\nYou have entered the following parents:" << endl;
     for (int i = 0; i < parentCounter; i++)
     {
         showParent(user[i]);
     }
 }
 
-
+//It shows a certain parent by ID
 void showParentInfoById(PARENT* user, int& parentCounter)
 {
     int id;
@@ -169,7 +169,7 @@ void showParentInfoById(PARENT* user, int& parentCounter)
     }
 }
 
-
+//Finds parent by his/her ID
 int getParentById(PARENT* user, int& parentCounter, int id)
 {
 
@@ -183,7 +183,7 @@ int getParentById(PARENT* user, int& parentCounter, int id)
     return -1;
 }
 
-
+//Deletes certain parent found by the getParentById function
 void deleteParent(PARENT* user, int& parentCounter, int id)
 {
     int index = getParentById(user, parentCounter, id);
@@ -205,7 +205,7 @@ void deleteParentMenu(PARENT* user, int& parentCounter, int& maxId)
     deleteParent(user, parentCounter, id);
 }
 
-
+//Finds parent by his/her last name
 void findParentByLastName(PARENT* user, int& parentCounter)
 {
     string parentLastName;
@@ -228,6 +228,7 @@ void findParentByLastName(PARENT* user, int& parentCounter)
     }
 }
 
+//Finds a certain child by his/her name
 void findChildByName(PARENT* user, int& parentCounter)
 {
     string childName;
@@ -250,12 +251,7 @@ void findChildByName(PARENT* user, int& parentCounter)
     }
 }
 
-void updateParentInfo(PARENT* user, int& parentCounter, int id)
-{
-    
-
-}
-
+//Updates parent's info by his Id
 void updateParentInfoById(PARENT* user, int& parentCounter)
 {
     int id;
@@ -280,6 +276,7 @@ void updateParentInfoById(PARENT* user, int& parentCounter)
     }
 }
 
+//Makes sum of child's age and the points he gets wether he/she lives near or far from the kindergarten
 void sumCandidatePoints(PARENT* user, int& parentCounter)
 {
     
@@ -289,6 +286,7 @@ void sumCandidatePoints(PARENT* user, int& parentCounter)
     }
 }
 
+//Visualise user menu
 bool mainMenu(PARENT* user, int& parentCounter, int& maxId)
 {
     int choice;
