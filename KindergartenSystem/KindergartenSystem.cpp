@@ -333,7 +333,7 @@ bool mainMenu(PARENT* user, int& parentCounter, int& maxId)
         case 4:
             if (parentCounter == 0)
             {
-                cout << "Sorry there are not added parents! \nPlease choose option number 1 to add an employee!" << endl << endl;
+                cout << "Sorry there are not added parents! \nPlease choose option number 1 to add a parent profile!" << endl << endl;
             }
             else
             {
